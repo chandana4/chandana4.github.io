@@ -1,6 +1,262 @@
 <!DOCTYPE html>
-<html>
- <body>
- Hello world
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandana Sasidharan</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FAFAF7; --text: #181818; --muted: #6a6a6a;
+    --accent: #2B4FA3; --accent-light: #f0f3fb; --border: #dededa;
+    --serif: 'EB Garamond', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 19px; line-height: 1.75; max-width: 700px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Nav */
+  nav { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 700px; padding: 1.1rem 2rem; background: var(--bg); z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+  nav.scrolled { border-color: var(--border); }
+  .nav-name { font-family: var(--sans); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em; }
+  .nav-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .nav-links a { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* Sections */
+  section { padding: 4.5rem 0 2rem; }
+  #hero { padding-top: 8.5rem; min-height: 62vh; display: flex; flex-direction: column; justify-content: center; }
+
+  /* Type */
+  h1 { font-family: var(--serif); font-size: 3.4rem; font-weight: 500; line-height: 1.12; letter-spacing: -0.015em; margin-bottom: 1rem; }
+  h2 { font-family: var(--serif); font-size: 1.55rem; font-weight: 500; margin-bottom: 1.4rem; padding-bottom: 0.45rem; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.7rem; }
+  p { margin-bottom: 1.1rem; }
+  .tagline { font-size: 1.15rem; color: var(--muted); font-style: italic; line-height: 1.6; margin-bottom: 2rem; }
+  .lede { font-size: 0.95rem; color: var(--muted); font-family: var(--sans); line-height: 1.65; margin-bottom: 0; }
+  .divider { width: 36px; height: 1px; background: var(--border); margin: 1.8rem 0; }
+  sup.fn { font-family: var(--sans); font-size: 0.62rem; color: var(--accent); cursor: default; margin-left: 1px; position: relative; top: -4px; font-weight: 500; }
+
+  /* Education Timeline */
+  .timeline { position: relative; margin-top: 1.8rem; padding-left: 1.6rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 2.2rem; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot { position: absolute; left: -1.98rem; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+  .tl-year { font-family: var(--sans); font-size: 0.72rem; color: var(--accent); font-weight: 500; letter-spacing: 0.06em; margin-bottom: 0.15rem; }
+  .tl-degree { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; margin-bottom: 0.1rem; }
+  .tl-institute { font-family: var(--sans); font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+  .tl-detail { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+  .tl-cpi { display: inline-block; font-family: var(--sans); font-size: 0.72rem; color: var(--accent); background: var(--accent-light); border-radius: 20px; padding: 0.12rem 0.55rem; margin-top: 0.3rem; }
+
+  /* Research tracks */
+  .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.8rem; }
+  @media (max-width: 560px) { .tracks { grid-template-columns: 1fr; } h1 { font-size: 2.5rem; } .nav-links { gap: 1rem; } }
+  .track { border-left: 2px solid var(--accent); padding-left: 1.2rem; cursor: pointer; transition: border-color 0.2s; outline: none; }
+  .track:hover, .track.open { border-color: #1a3580; }
+  .track-title { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .track-summary p { font-size: 0.93rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.7rem; }
+  .know-more { display: inline-flex; align-items: center; gap: 0.3rem; font-family: var(--sans); font-size: 0.75rem; color: var(--accent); margin-top: 0.4rem; user-select: none; transition: opacity 0.2s; }
+  .know-more .arrow { display: inline-block; transition: transform 0.3s ease; }
+  .track:hover .know-more { opacity: 0.7; }
+  .track-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease; opacity: 0; }
+  .track.open .track-detail { max-height: 1200px; opacity: 1; }
+  .track-detail-inner { margin-top: 1.1rem; background: var(--accent-light); border-radius: 0 6px 6px 0; padding: 1rem 1rem 0.8rem; margin-right: -0.2rem; }
+  .track-detail-inner p { font-size: 0.88rem; color: var(--text); line-height: 1.7; margin-bottom: 0.8rem; }
+  .track-detail-inner p:last-child { margin-bottom: 0; }
+  .detail-label { font-family: var(--sans); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; margin-top: 0.9rem; display: block; }
+  .detail-label:first-child { margin-top: 0; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+  .tag { font-family: var(--sans); font-size: 0.72rem; color: var(--accent); background: white; border: 1px solid #c5cff0; padding: 0.2rem 0.55rem; border-radius: 20px; }
+
+  /* Cards inside expanded panels */
+  .card-item { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 0.6rem 0.75rem; margin-bottom: 0.4rem; }
+  .card-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+  .card-meta { font-family: var(--sans); font-size: 0.72rem; color: var(--muted); font-style: italic; }
+  .card-desc { font-family: var(--sans); font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.55; }
+
+  /* Role strip inside expanded */
+  .role-strip { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.15rem; }
+  .role-strip .r-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 500; color: var(--text); }
+  .role-strip .r-period { font-family: var(--sans); font-size: 0.72rem; color: var(--muted); }
+
+  /* Contact */
+  .contact-links { display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; margin-top: 1.2rem; }
+  .contact-links a { font-family: var(--sans); font-size: 0.9rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px; transition: opacity 0.2s; }
+  .contact-links a:hover { opacity: 0.65; }
+
+  /* Footnotes */
+  .footnotes { border-top: 1px solid var(--border); margin-top: 4rem; padding: 2rem 0 5rem; font-family: var(--sans); font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+  .footnotes .eyebrow { margin-bottom: 1rem; }
+  .footnotes ol { padding-left: 1.1rem; }
+  .footnotes li { margin-bottom: 0.65rem; }
+  .fn-num { color: var(--accent); font-weight: 500; margin-right: 0.2rem; }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#research">Research</a>
+    <a href="#papers">Papers</a>
+    <a href="#press">Press</a>
+    <a href="#curiosities">Curiosities</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="about">
+  <h1>Chandana<br>Sasidharan</h1>
+  <p class="tagline">
+    I think about graphs, computational complexity, and what it means to build knowledge, whether in a Turing machine or a classroom.
+  </p>
+  <h2>About</h2>
+  <p>
+    I recently completed my MS by Research at IIT Palakkad, advised by Dr. Krishnamoorthy Dinesh. During this programme, I spent the better part of my time doing mental gynmanstics over where the complexity of reachability problems for restricted graphs lies, especially in the logspace setting.
+  </p>
+  <p>
+    Before this, I studied public policy at IIT Bombay, advised by Dr. Prabhir Vishnu Poruthiyil, with a focus on education policy, media literacy and political discourse. I worked on a comparative study of media literacy curricula across Finland, Ukraine, and Kerala, tracing how learning objectives, pedagogical choices, and approaches to misinformation.
+
+    I am drawn to questions at both ends of the spectrum, the rigorous formalism of complexity theory and the craft of policies that shape how people learn and think.
+  </p>
+  <p>
+  </p>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <h2>Education</h2>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2023 - 2026</div>
+      <div class="tl-degree">MS by Research - Theoretical Computer Science</div>
+      <div class="tl-institute">Indian Institute of Technology, Palakkad</div>
+      <div class="tl-detail">Complexity Theory | Algorithms | | Graph Theory | Deep Learning </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2020 - 2022</div>
+      <div class="tl-degree">Masters in Public Policy</div>
+      <div class="tl-institute">Indian Institute of Technology, Bombay</div>
+      <div class="tl-detail">Education Policy | Media Literacy | Discourse Analysis</div>
+      <span class="tl-cpi">CPI 8.72 / 10</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2015 - 2019</div>
+      <div class="tl-degree">B.Tech - Computer Science & Engineering</div>
+      <div class="tl-institute">Federal Institute of Science and Technology, Angamaly</div>
+      <div class="tl-detail">Soft Computing | Machine Learning | Artificial Intelligence</div>
+      <span class="tl-cpi">CPI 8.32 / 10</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Research -->
+<section id="research">
+  <h2>Research Interests</h2>
+  <div class="tracks">
+
+    <!-- Track 1: TCS -->
+    <div class="track" id="track1" tabindex="0" role="button" aria-expanded="false">
+      <div class="track-summary">
+        <div class="track-title">Theoretical Computer Science</div>
+        <p>How much space a TM needs to decide reachability in graphs, and how and how restricting a graph's structure can reduce that space requirement </p>
+<p>Particularly interested in the logspace complexity of reachability for restricted graph classes (simple path, chordal, and perfect graphs), with recognition as a necessary first step.</p>
+      </div>
+      <span class="know-more"><span class="arrow">↓</span> know more</span>
+      <div class="track-detail" aria-hidden="true">
+        <div class="track-detail-inner">
+          TBA
+        </div>
+      </div>
+    </div>
+
+    <!-- Track 2: Policy & Education -->
+    <div class="track" id="track2" tabindex="0" role="button" aria-expanded="false">
+      <div class="track-summary">
+        <div class="track-title">Public Policy, Pedagogy & Education</div>
+        <p>How educational systems are designed, who they reach, and how technology mediates (or disrupts) the transfer of knowledge.
+        <p>Particularly interested in media literacy education, technology-mediated education, and what rigorous pedagogy looks like at scale.</p>
+      </div>
+      <span class="know-more"><span class="arrow">↓</span> know more</span>
+      <div class="track-detail" aria-hidden="true">
+        <div class="track-detail-inner">
+          TBA
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Accepted Papers -->
+<section id="papers">
+  <h2>Accepted Papers</h2>
+  <div class="card-item">
+    <div class="card-title">Space Complexity of Reachability in Simple Path Graphs</div>
+    <div class="card-meta">MFCS 2026 (51st International Symposium on Mathematical Foundations of Computer Science), Paris, France | Aug 24-28, 2026</div>
+    <div class="card-desc">Joint work with Krishnamoorthy Dinesh. [TBA: link to the paper/arXiv]</div>
+  </div>
+</section>
+
+<!-- Press -->
+<section id="press">
+  <h2>Newspaper Article</h2>
+  <div class="card-item">
+    <div class="card-title">Need for Digital Media Literacy in Schools</div>
+    <div class="card-meta">Hindustan Times (Opinion), Feb 24, 2022</div>
+    <div class="card-desc">Op-ed on digital media literacy programmes in education policies. <a href="https://www.hindustantimes.com/opinion/introduce-digital-media-literacy-in-schools-101645688394072.html" target="_blank"> Read on Hindustan Times</a></div>
+  </div>
+</section>
+
+<!-- Curiosities -->
+<section id="curiosities">
+  <h2>Other Curiosities</h2>
+  <p style="color:var(--muted); font-size:0.85rem; font-style:italic; margin-bottom:0.8rem;">Things I think about when I'm not thinking about complexity theory or pedagogy.</p>
+  <div class="tag-row">
+    <span class="tag">🤖 Machine Learning</span>
+    <span class="tag">🏋️ Fitness &amp; Nutrition</span>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-links">
+    <a href="mailto:chaandana4@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/chandana-sasidharan/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/chandana4" target="_blank">GitHub</a>
+  </div>
+</section>
+
+<!-- Footnotes -->
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+  document.querySelectorAll('.track').forEach(track => {
+    const toggle = () => {
+      const isOpen = track.classList.toggle('open');
+      track.setAttribute('aria-expanded', isOpen);
+      track.querySelector('.track-detail').setAttribute('aria-hidden', !isOpen);
+      const km = track.querySelector('.know-more');
+      km.innerHTML = isOpen
+        ? '<span class="arrow" style="transform:rotate(180deg);display:inline-block;">↓</span> collapse'
+        : '<span class="arrow" style="display:inline-block;">↓</span> know more';
+    };
+    track.addEventListener('click', toggle);
+    track.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+</script>
+</body>
 </html>
