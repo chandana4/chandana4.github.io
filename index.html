@@ -15,6 +15,15 @@
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 19px; line-height: 1.75; max-width: 700px; margin: 0 auto; padding: 0 2rem; }
 
+  #about h1 {
+    margin-top: 2rem;
+  }
+  @media (max-width: 768px) {
+    #about h1 {
+      margin-top: 4rem;
+    }
+  }
+
   /* Nav */
   nav { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 700px; padding: 1.1rem 2rem; background: var(--bg); z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
   nav.scrolled { border-color: var(--border); }
