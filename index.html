@@ -35,7 +35,9 @@
   /* Sections */
   section { padding: 4.5rem 0 2rem; }
   #hero { padding-top: 8.5rem; min-height: 62vh; display: flex; flex-direction: column; justify-content: center; }
-
+.hero-flex { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.hero-photo { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; }
+@media (max-width: 560px) { .hero-flex { flex-direction: column-reverse; align-items: flex-start; } .hero-photo { width: 100px; height: 100px; } }
   /* Type */
   h1 { font-family: var(--serif); font-size: 3.4rem; font-weight: 500; line-height: 1.12; letter-spacing: -0.015em; margin-bottom: 1rem; }
   h2 { font-family: var(--serif); font-size: 1.55rem; font-weight: 500; margin-bottom: 1.4rem; padding-bottom: 0.45rem; border-bottom: 1px solid var(--border); }
@@ -121,13 +123,19 @@
 
 <!-- Hero -->
 <section id="about">
-  <h1>Chandana<br>Sasidharan</h1>
-  <p class="tagline">
-    I think about graphs, computational complexity, and what it means to build knowledge, whether in a Turing machine or a classroom.
-  </p>
+  <div class="hero-flex">
+    <div>
+      <h1>Chandana<br>Sasidharan</h1>
+      <p class="tagline">
+        I think about graphs, computational complexity, and what it means to build knowledge, whether in a Turing machine or a classroom.
+      </p>
+    </div>
+    <img src="your-photo.jpeg" alt="Chandana Sasidharan" class="hero-photo">
+  </div>
+
   <h2>About</h2>
   <p>
-    I am doing my MS by Research at IIT Palakkad, advised by <a href="https://kdinesh.bitbucket.io/">Dr. Krishnamoorthy Dinesh</a>. During this programme, I spent the better part of my time doing mental gynmanstics over where the complexity of reachability problems for restricted graphs lies, especially in the logspace setting. Specifically, I showed that reachability in simple path graphs lies in UL ∩ coUL.
+    I am doing my MS by Research at IIT Palakkad, advised by <a href="https://kdinesh.bitbucket.io/">Dr. Krishnamoorthy Dinesh</a>. During this programme, I spent the better part of my time doing mental gynmanstics over where the space complexity of reachability problems for restricted graphs lies, especially in the logspace setting. Specifically, I showed that reachability in simple path graphs lies in UL ∩ coUL.
   </p>
   <p>
     Before this, I studied public policy at IIT Bombay, advised by <a href="https://www.cps.iitb.ac.in/faculty/prabhir-vishnu-poruthiyil/"> Dr. Prabhir Vishnu Poruthiyil</a>, with a focus on education policy, media literacy and political discourse. I worked on comparative study of media literacy curricula across Finland, Ukraine, and Kerala, tracing learning objectives, pedagogical choices, and approaches to misinformation.
